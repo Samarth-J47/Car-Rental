@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relational Schema Diagram</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            padding: 40px;
+            position: relative;
+            margin: 0;
+        }
+        .schema-container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 80px; 
+            margin-left: 200px; 
+            margin-top: 50px;
+        }
+        .table-def {
+            display: inline-block;
+            align-self: flex-start;
+        }
+        .table-name {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #333;
+        }
+        .table-row {
+            display: flex;
+            border: 2px solid #222;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+        .cell {
+            padding: 10px 18px;
+            border-right: 2px solid #222;
+            font-size: 15px;
+            position: relative;
+            color: #111;
+        }
+        .cell:last-child {
+            border-right: none;
+        }
+        .pk {
+            text-decoration: underline;
+            font-weight: bold;
+            background-color: #e9ecef;
+        }
+        
+        #svg-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1000px;
+            z-index: 1;
+            pointer-events: none;
+        }
+        path {
+            fill: none;
+            stroke: #2c3e50;
+            stroke-width: 1.5;
+            stroke-linejoin: round;
+        }
+    </style>
+</head>
+<body>
+
+    <svg id="svg-layer">
+        <defs>
+            <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                <polygon points="0 0, 8 4, 0 8" fill="#2c3e50" />
+            </marker>
+        </defs>
+    </svg>
+
+    <div class="schema-container">
+        
+        <!-- USERS TABLE -->
+        <div class="table-def" id="table-users">
+            <div class="table-name">USERS</div>
+            <div class="table-row">
+                <div class="cell pk" id="u-id">id</div>
+                <div class="cell">username</div>
+                <div class="cell">email</div>
+                <div class="cell">password</div>
+                <div class="cell">role</div>
+                <div class="cell">bank_name</div>
+                <div class="cell">account_no</div>
+                <div class="cell">payment_pin</div>
+            </div>
+        </div>
+
+        <!-- CARS TABLE -->
+        <div class="table-def" id="table-cars">
+            <div class="table-name">CARS</div>
+            <div class="table-row">
+                <div class="cell pk" id="c-id">id</div>
+                <div class="cell">car_name</div>
+                <div class="cell">brand</div>
+                <div class="cell">price_per_day</div>
+                <div class="cell">seats</div>
+                <div class="cell">status</div>
+                <div class="cell">image</div>
+            </div>
+        </div>
+
+        <!-- BOOKINGS TABLE -->
+        <div class="table-def" id="table-bookings">
+            <div class="table-name">BOOKINGS</div>
+            <div class="table-row">
+                <div class="cell pk" id="b-id">id</div>
+                <div class="cell" id="b-user-id">user_id</div>
+                <div class="cell" id="b-car-id">car_id</div>
+                <div class="cell">start_date</div>
+                <div class="cell">end_date</div>
+                <div class="cell">total_price</div>
+                <div class="cell">status</div>
+            </div>
+        </div>
+
+        <!-- PAYMENTS TABLE -->
+        <div class="table-def" id="table-payments">
+            <div class="table-name">PAYMENTS</div>
+            <div class="table-row">
+                <div class="cell pk" id="p-id">id</div>
+                <div class="cell" id="p-user-id">user_id</div>
+                <div class="cell" id="p-admin-id">admin_id</div>
+                <div class="cell" id="p-booking-id">booking_id</div>
+                <div class="cell">amount</div>
+                <div class="cell">status</div>
+                <div class="cell">created_at</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function drawArrow(fromId, toId, dropDrop, safeX, targetDrop, targetOffsetX) {
+            const fromEl = document.getElementById(fromId);
+            const toEl = document.getElementById(toId);
+            const svg = document.getElementById('svg-layer');
+
+            const fromRect = fromEl.getBoundingClientRect();
+            const toRect = toEl.getBoundingClientRect();
+
+            const scrollY = window.scrollY || window.pageYOffset;
+            const scrollX = window.scrollX || window.pageXOffset;
+
+            // Start EXACTLY at bottom center of the FK
+            const startX = fromRect.left + scrollX + (fromRect.width / 2);
+            const startY = fromRect.bottom + scrollY;
+
+            // End with a slight horizontal offset to prevent overlap
+            const endX = toRect.left + scrollX + (toRect.width / 2) + targetOffsetX;
+            const endY = toRect.bottom + scrollY; 
+
+            // Calculate routing points
+            const dropY = startY + dropDrop;
+            const routeY = toRect.bottom + scrollY + targetDrop;
+
+            // Draw the path using SVG
+            const pathData = `
+                M ${startX} ${startY}
+                L ${startX} ${dropY}
+                L ${safeX} ${dropY}
+                L ${safeX} ${routeY}
+                L ${endX} ${routeY}
+                L ${endX} ${endY}
+            `;
+
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", pathData);
+            path.setAttribute("marker-end", "url(#arrowhead)");
+            svg.appendChild(path);
+        }
+
+        window.onload = function() {
+            // Target offsets stagger the lines so they remain distinct side-by-side
+            
+            // BOOKINGS.car_id -> CARS.id
+            drawArrow('b-car-id', 'c-id', 20, 160, 20, 0);
+
+            // BOOKINGS.user_id -> USERS.id
+            drawArrow('b-user-id', 'u-id', 35, 120, 20, -14);
+
+            // PAYMENTS.booking_id -> BOOKINGS.id
+            drawArrow('p-booking-id', 'b-id', 20, 80, 20, 0);
+
+            // PAYMENTS.user_id -> USERS.id
+            drawArrow('p-user-id', 'u-id', 45, 40, 35, 0);
+
+            // PAYMENTS.admin_id -> USERS.id
+            drawArrow('p-admin-id', 'u-id', 65, 10, 50, 14);
+        };
+    </script>
+</body>
+</html>
