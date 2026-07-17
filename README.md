@@ -14,19 +14,19 @@ A web-based **Car Rental Management System** built using **PHP** and **MySQL**. 
 -  Book Cars
 -  Payment Processing
 -  Download Booking Receipt
--  view Booking History
+-  View Booking History
 -  Cancel Bookings
 -  Manage User Profile
 -  Forgot & Reset Password
 
 ###  Admin Features
 
-- 📊 Admin Dashboard
-- 🚗 Add, Edit & Delete Cars
-- 📋 Manage Car Listings
-- 👥 Manage Users
-- 📅 Manage Bookings
-- 💰 View Payment Details
+-  Admin Dashboard
+-  Add, Edit & Delete Cars
+-  Manage Car Listings
+-  Manage Users
+-  Manage Bookings
+-  View Payment Details
 
 ---
 
@@ -96,7 +96,7 @@ This project is developed for **educational purposes**. Feel free to use, modify
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 Developed using **PHP**, **MySQL**, **HTML**, **CSS**, and **JavaScript**.
 
