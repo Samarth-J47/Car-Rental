@@ -1,31 +1,79 @@
-Car Rental System 
+# 🚗 Car Rental Management System
 
-A web-based Car Rental Management System built using PHP and MySQL. This application allows users to browse available cars and manage bookings.
+A web-based **Car Rental Management System** built using **PHP** and **MySQL**. This application enables users to browse available cars, manage bookings, and provides a simple and responsive interface for an efficient car rental experience.
 
- Features
+---
 
-User Authentication: Secure login and registration.
+## ✨ Features
 
-Car Listing: View available cars with details.
+- 🔐 User Authentication (Login & Registration)
+- 🚘 Browse Available Cars
+- 📋 View Car Details
+- 📅 Book Cars for Specific Dates
+- 📱 Responsive User Interface
+- ⚡ Easy-to-use Navigation
 
-Booking System: Easily book vehicles for specific dates.
+---
 
-Responsive UI: Designed for a smooth user experience.
+## 🛠️ Tech Stack
 
- Tech Stack
+| Technology | Description |
+|------------|-------------|
+| **Backend** | PHP |
+| **Database** | MySQL |
+| **Frontend** | HTML, CSS, JavaScript (Bootstrap/Tailwind CSS) |
+| **Server** | XAMPP (Apache) |
 
-Backend: PHP
+---
 
-Database: MySQL
+## 📋 Prerequisites
 
-Frontend: HTML, CSS, JavaScript (Bootstrap/Tailwind)
+Before running the project, ensure you have the following installed:
 
-Server: XAMPP (Apache)
+- XAMPP (or any local server with PHP and MySQL support)
+- A modern web browser
 
- Prerequisites
+---
 
-XAMPP (or any local server with PHP and MySQL support).
+## 📂 Project Structure
 
-A web browser. 
+```text
+car-rental-management-system/
+│── admin/
+│── assets/
+│── css/
+│── images/
+│── js/
+│── includes/
+│── database/
+│── index.php
+│── login.php
+│── register.php
+│── booking.php
+│── README.md
+```
 
-This project is for educational purposes. Feel free to use and modify it!
+---
+
+## 💻 Usage
+
+- Register a new account or log in.
+- Browse the available cars.
+- View car information.
+- Book a car for your preferred dates.
+- Manage your bookings.
+
+---
+
+
+## 📄 License
+
+This project is developed for **educational purposes**. Feel free to use, modify, and enhance it for learning and personal projects.
+
+---
+
+## 👨‍💻 Author
+
+Developed using **PHP**, **MySQL**, **HTML**, **CSS**, and **JavaScript**.
+
+⭐ If you found this project helpful, consider giving it a star!
